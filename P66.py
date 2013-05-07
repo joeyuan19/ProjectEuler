@@ -1,24 +1,23 @@
-import math
+N = 1000
 
-max = 0
-Dmax = 0
+dio = [d for d in range(2,N+1) if d**.5 != int(d**.5)]
 
-N = 200
+Dmax = 1001
+xmax = 0
 
-for D in range(1,N+1):
-	if math.sqrt(D) != int(math.sqrt(D)):
-		print D
-		x = 1
+for D in dio:
+	x = 0
+	y = 1
+#	print D
+	while x**2 - D*(y**2) != 1:
 		y = 1
-		while x != float(1 + D*y*y)/x:
-			while x > float(1 + D*y*y)/x:
-				y += 1
-			if x == float(1 + D*y*y)/x:
-				break
-			else:
-				y = 1
-				x += 1
-		if x > max:
-			max = x
-			Dmax = D
-print max, Dmax
+		x += 1
+		while x**2 > D*(y**2) + 1:
+			y += 1
+			print D, y
+	print str(x) + "^2 - " + str(D) + "x" + str(y) + "^2 = 1"
+#print x
+	if x > xmax:
+		Dmax = D
+		xmax = x
+print Dmax

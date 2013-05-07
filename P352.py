@@ -32,6 +32,8 @@ for i in range(1,int(T+1)):
     #print 1 - ((1-p)**(T/i))
     #Sum(T,p)
     print P(T,p)
+
+
 """
 worst case first depth search method
      g1
