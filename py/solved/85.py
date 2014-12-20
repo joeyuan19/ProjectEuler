@@ -17,9 +17,7 @@ for W in range(1,L):
     for H in range(W,L):
         n = subrects(W,H)
         diff = abs(MM-n)
-        print W,H,d
         if diff < d:
-            print "<<<>>>>",W,H,diff
             d = diff 
             N = n
             _w,_h = W,H
@@ -29,6 +27,7 @@ for W in range(1,L):
 
 print "Limit:",L
 print "(w,h) = ("+str(_w)+","+str(_h)+")"
+print "Area:",_w*_h
 print "Subrects:",N
 print "Diff:",d
 
