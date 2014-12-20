@@ -1,5 +1,13 @@
 import sys, time
 
+def check(n,base):
+	for i in base:
+		if not check_pair(i,n):
+			return False
+	return True
+
+def check_pair(a,b):
+	return prime(concatints(a,b)) and prime(concatints(a,b))
 
 def concatints(a,b):
   return int(str(a) + str(b))
@@ -19,108 +27,47 @@ def prime(n):
 			i += 2
 		return True
 
-def primepair(x,y):
-	if not prime(concatints(x,y)):
-		return False
-	elif not prime(concatints(y,x)):
-		return False
-	return True
+def get_next_prime(n):
+	i = n+1
+	while True:
+		if prime(i):
+			return i
+		i += 1
 
-def check(list, sieve):
-	L = len(list)
-	Lp = len(sieve)
-	for i in range(L-1):
-		for j in range(L):
-			if concatints(list[i],list[j]) < sieve[-1] and concatints(list[j],list[i]) < sieve[-1]:
-				if concatints(list[i],list[j]) not in sieve or concatints(list[j],list[i]) not in sieve:
-					return False
-			elif not primepair(list[i],list[j]):
-				return False
-	return True
+p = []
 
-def sum(a):
-	s = 0
-	for i in a:
-		s += i
-	return s
-
-def dif(a,b):
-	if len(a) > len(b):
-		return [x for x in b if x not in a]
-	else:
-		return [x for x in a if x not in b]
-
-def inter(a,b):
-	if len(a) > len(b):
-		return [x for x in b if x in a]
-	else:
-		return [x for x in a if x in b]
-
-def Sieve(N):
-    x = N*[0]
-    for h in range(int(N**.5)+1):
-        num = h + 1
-        if num >= 2:
-            if x[h] == 0:
-                for k,c in enumerate(x[num:]):
-                    if (k+1)%num == 0:
-                            x[k+num] += 1
-        else:
-            x[h] += 1
-    return [j+1 for j,i in enumerate(x) if i == 0]
-
-N = 1000
-n_a = 4
-
-p = Sieve(N)
-L = len(p)
-
-for i in range(L):
-	for j in range(i+1,L):
-		if i != j:
-			for k in range(j+1,L):
-				if k != j and k != i:
-					for l in range(k+1,L):
-						print i,j,k,l,L
-						if l != k and l != j and l != i:
-							a = [p[i],p[j],p[k],p[l]]
-							if check(a,p):
-								print a
-							#for n in range(l+1,L):
-							#	if n != l and n != k and n != j and n != i:
-
-sys.exit()
-
-pairs = {}
-print L,"primes created"
-
+i = get_next_prime(0)
 start = time.time()
+while i < 20000:
+	p.append(i)
+	i = get_next_prime(i)
+print "Primes Generated ",time.time()-start,"ms" 
 
-for i in range(L):
-	temp = []
-	for j in range(L):
-		if i != j:
-			if concatints(p[i],p[j]) < p[-1] and concatints(p[j],p[i]) < p[-1]:
-				if concatints(p[i],p[j]) in p and concatints(p[j],p[i]) in p:
-					temp.append(p[j])
-			else:
-				if primepair(p[i],p[j]):
-					temp.append(p[j])
-	pairs[p[i]] = temp
-	del(temp)
-	temp = []
+L = len(p)
+start = time.time()
+a = 1
+log = []
+while a < L: 
+	print "a = ", a
+	b = a + 1
+	while b < L:
+		c = b + 1
+		while c < L:
+			d = c + 1
+			while d < L:
+				e = d + 1
+				while e < L:
+					#print "a:",a,"b:",b,"c:",c,"d:",d,"e:",e
+					if check(p[e],[p[a],p[b],p[c],p[d]]):
+						log.append([p[a],p[b],p[c],p[d],p[e]])
+					e += 1
+				d += 1
+			c += 1
+		b += 1
+	a += 1
+print "Solved",time.time()-start,"ms" 
 
-Lpairs = len(pairs)
-print Lpairs,"pairs found"
-chain = []
-rel_groups = []
+for i in log:
+	print i, sum(i)
 
-for prime in p:
-	if len(pairs[prime]) > n_a:
-		rel_groups.append(pairs[prime])
-
-print len(rel_groups),"relvent groups found"
-
-print time.time() - start
-
-
+print len(pairs)

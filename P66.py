@@ -1,23 +1,22 @@
-N = 1000
+def first_sol(D):
+    x = 1
+    while True:
+        y = 1
+        while x*x - D*y*y > 1:
+            y += 1
+        if x*x - D*y*y == 1:
+            return x,y
+        x += 1
+D = 1000
+m = -1
+for N in xrange(D+1):
+    print N 
+    if int(N**.5) != N**.5:
+        x,y = first_sol(N)
+        if x > m:
+            m = x
+            d = N
+print d,m
 
-dio = [d for d in range(2,N+1) if d**.5 != int(d**.5)]
 
-Dmax = 1001
-xmax = 0
 
-for D in dio:
-	x = 0
-	y = 1
-#	print D
-	while x**2 - D*(y**2) != 1:
-		y = 1
-		x += 1
-		while x**2 > D*(y**2) + 1:
-			y += 1
-			print D, y
-	print str(x) + "^2 - " + str(D) + "x" + str(y) + "^2 = 1"
-#print x
-	if x > xmax:
-		Dmax = D
-		xmax = x
-print Dmax
