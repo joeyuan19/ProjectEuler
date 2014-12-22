@@ -1,4 +1,4 @@
-def prime(n):
+def iprime(n):
     if n%2 == 0:
         return False
     i = 3
@@ -9,12 +9,13 @@ def prime(n):
     return True
 
 def sieve(N):
-    s = [1,1,0]+[0,1]*N
-    for i in range(3,int(N**.5)+1,2):
-        itr = i*2
-        while itr < N:
-            s[itr] += 1
-            itr += i
-    return [i for i in range(N) if s[i] == 0]
+    s = [False,False,True]+[True,False]*N
+    for i in xrange(3,int(N**.5)+1,2):
+        if s[i]:
+            itr = i*2
+            while itr < N:
+                s[itr] = False 
+                itr += i
+    return [i for i in range(N) if s[i]]
 
 
