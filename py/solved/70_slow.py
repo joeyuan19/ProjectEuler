@@ -1,3 +1,4 @@
+from totient import totients
 import time
 debug = False
 
@@ -36,7 +37,7 @@ def fact(n,s=None):
                 break
 
 
-N = 10**6
+N = 10**7
 L = N+1
 s = sieve(L)
 space = [0]*L
@@ -64,7 +65,7 @@ for i in xrange(2,L):
     elif 2*i < L:
         space[2*i] = (2-i%2)*space[i]
 
-print max((float(i)/space[i],i) for i in xrange(2,L))
+print min((float(i)/space[i],i) for i in xrange(2,L) if sorted(str(i)) == sorted(str(space[i])))
 print "Time:",time.time()-start,"s"
 if debug:
     print "Creating brute force solution"
@@ -81,17 +82,3 @@ if debug:
     if no_error:
         print "Looks good!"
 
-
-"""
-Notable solution found afterward in the forums
-N = 10**6
-s = 1
-for p in sieve(N):
-    if s*p > N:
-        print s
-        break
-    s = s*p
-
-import sys
-sys.exit()
-"""
