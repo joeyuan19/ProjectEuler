@@ -9,13 +9,13 @@ def iprime(n):
     return True
 
 def sieve(N):
-    s = [False,False,True]+[True,False]*N
-    for i in xrange(3,int(N**.5)+1,2):
+    s = [0,0,1]+[1,0]*(N/2)
+    i = 3
+    while i*i < N:
         if s[i]:
-            itr = i*2
-            while itr < N:
-                s[itr] = False 
-                itr += i
-    return [i for i in range(N) if s[i]]
+            for itr in xrange(i*2,N,i):
+                s[itr] = 0
+        i += 2
+    return [i for i in range(N) if s[i]==1]
 
 
