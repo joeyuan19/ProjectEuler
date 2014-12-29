@@ -9,15 +9,14 @@
 from time import clock
 
 def pyth(a,b,c):
-    if a**2 + b**2 == c**2:
-        return True
-    else:
-        return False
+    return a**2 + b**2 == c**2:
+
 def perim(p,a,b=0,c=0):
     if a+b+c != p:
         return False
     else:
         return True
+
 most = []
 for p in range(1001):
     print p
