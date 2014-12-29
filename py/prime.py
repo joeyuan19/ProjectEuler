@@ -1,4 +1,4 @@
-def prime(n):
+def iprime(n):
     if n%2 == 0:
         return False
     i = 3
