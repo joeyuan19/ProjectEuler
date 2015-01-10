@@ -2,13 +2,15 @@
 #include <cstring>
 #include <string>
 
+using namespace std;
+
 int palindrome(int n) {
-    std::string s = std::to_string(n);
+    string s = to_string(n);
     return strlen(s);
 }
 
 int main() {
-    std::cout << palindrome(101) << std::endl;
+    cout << palindrome(101) << endl;
 }
 
 
