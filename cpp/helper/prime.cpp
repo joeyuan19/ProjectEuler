@@ -1,4 +1,3 @@
-#include <iostream>
 #include <vector>
 
 bool prime(int n) {
@@ -32,7 +31,10 @@ std::vector<int> sieve(int n) {
         }
     }
     return s;
-    /*
+}
+std::vector<int> primes_up_to(int n) {
+    vector<int> s;
+    s = sieve(n);
     std::vector<int> p;
     for (i = 0; i <= n; i++) {
         if (s[i] == 1) {
@@ -40,5 +42,5 @@ std::vector<int> sieve(int n) {
         }
     }
     return p;
-    */
+
 }
