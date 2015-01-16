@@ -1,8 +1,17 @@
 #ifndef LARGEN_H
 #define LARGEN_H
 
+#include <iostream>
 #include <vector>
 #include <string>
+
+int max(int a, int b) {
+    if (a > b) {
+        return a;
+    } else {
+        return b;
+    }
+}
 
 char i_to_c(int i) {
     switch(i) {
@@ -31,15 +40,23 @@ char i_to_c(int i) {
 
 class Large {
     std::vector<int> number;
-    int size;
+    int sign;
     public:
         Large() {
-            size = 0;
+            number.push_back(0);
+            sign = 1;
+        };
+        Large(int n) {
+            number.insert(number.begin(),n%10);
+            n = n/10;
+            while (n != 0) {
+                number.insert(number.begin(),n%10);
+                n = n/10;
+            }
         };
         Large(int _size, int n) {
-            size = _size;
-            number.resize(size);
-            int i = size-1;
+            number.resize(_size);
+            int i = number.size()-1;
             number[i--] = n%10;
             n = n/10;
             while (n != 0 && i >= 0) {
@@ -50,7 +67,7 @@ class Large {
         std::string toString() {
             std::string s = "";
             bool start = false;
-            for (int i = 0; i < size; i++) {
+            for (int i = 0; i < number.size(); i++) {
                 if (start) {
                     s += i_to_c(number.at(i));
                 } else if (number.at(i) != 0) {
@@ -58,50 +75,85 @@ class Large {
                     s += i_to_c(number.at(i));
                 }
             }
-            return s;
+            if (s.length() > 0) {
+                return s;
+            } else {
+                return "0";
+            }
         };
         void copy(Large * n) {
-            size = n->size;
-            number.resize(size);
-            for (int i = 0; i < size; i++) {
+            number.resize(n->size());
+            for (int i = 0; i < number.size(); i++) {
                 number[i] = n->number.at(i);
             }
+        };
+        int size() {
+            return number.size();
         }
         void resize(int new_size) {
-            if (new_size <= size) {
+            if (new_size <= number.size()) {
                 return;
             }
-            int delta = new_size - size;
+            int delta = new_size - number.size();
             number.resize(new_size);
-            for (int i = size-1; i >= 0; i--) {
+            for (int i = number.size()-1; i >= 0; i--) {
                 number[i-delta] = number[i];
                 number[i] = 0;
             }
-            size = new_size;
         };
         void multiply(int n) {
-            int tmp = 0, s;
-            for (int i = size-1; i >= 0; i--) {
+            int tmp = 0, s, i;
+            for (i = number.size()-1; i >= 0; i--) {
                 s = number[i]*n+tmp;
                 number[i] = s%10;
                 tmp = s/10;
             }
-        }
+            while (tmp > 0) {
+                number.insert(number.begin(),tmp%10),
+                tmp = tmp/10;
+            }
+        };
         void add(Large n) {
-            int tmp = 0, s;
-            for (int i = n.size-1; i >= 0; i--) {
-                s = number[i]+n.number[i]+tmp;
-                number[i] = s%10;
+            int tmp = 0, s, i, j, v;
+            for (i = n.size()-1, j = number.size()-1; i >= 0; i--,j--) {
+                if (j < 0) {
+                    s = n.number[i] + tmp;
+                    number.insert(number.begin(),s%10);
+                } else {
+                    s = number[j] + n.number[i] + tmp;
+                    number[j] = s%10;
+                }
                 tmp = s/10;
             }
         };
+        void add(int n) {
+            add(Large(n));
+        };
         int get(int i) {
-            if (i >= 0 && i < size) {
+            if (0 <= i && i < number.size()) {
                 return number.at(i);
+            } else if (i < 0) {
+                return 0;
             } else {
                 return -1;
             }
-        }
+        };
+        int compare(Large num) {
+            int m = max(number.size(),num.size());
+            int i = number.size()-m;
+            int j = num.size()-m;
+            for (i = number.size()-m, j = num.size()-m; i < number.size() && j < num.size(); i++, j++) {
+                if (get(i) > num.get(j)) {
+                    return 1;
+                } else if (get(i) < num.get(j)) {
+                    return -1;
+                }
+            }
+            return 0;
+        };
+        int compare(int n) {
+            return compare(Large(n));
+        };
 };
 
 
