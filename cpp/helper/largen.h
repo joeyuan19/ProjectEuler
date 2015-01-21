@@ -81,6 +81,9 @@ class Large {
                 return "0";
             }
         };
+        std::vector<int> getNumber() {
+            return number;
+        }
         void copy(Large * n) {
             number.resize(n->size());
             for (int i = 0; i < number.size(); i++) {
@@ -112,6 +115,10 @@ class Large {
                 number.insert(number.begin(),tmp%10),
                 tmp = tmp/10;
             }
+        };
+        void divide(Large n) {
+            /*long tmp = n.toLong();
+            set(toLong()/n.toLong());*/
         };
         void add(Large n) {
             int tmp = 0, s, i, j, v;
@@ -153,6 +160,22 @@ class Large {
         };
         int compare(int n) {
             return compare(Large(n));
+        };
+        long toLong() {
+            long s = 0, tmp = 1;
+            for (int i = size()-1; i >= 0; i--) {
+                s += tmp*get(i);
+                tmp = 10*tmp;
+            }
+            return s;
+        };
+        int toInt() {
+            int s = 0, tmp = 1;
+            for (int i = size()-1; i >= 0; i--) {
+                s += tmp*get(i);
+                tmp = 10*tmp;
+            }
+            return s;
         };
 };
 
