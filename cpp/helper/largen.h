@@ -54,6 +54,14 @@ class Large {
                 n = n/10;
             }
         };
+        Large(long n) {
+            number.insert(number.begin(),n%10);
+            n = n/10;
+            while (n != 0) {
+                number.insert(number.begin(),n%10);
+                n = n/10;
+            }
+        };
         Large(int _size, int n) {
             number.resize(_size);
             int i = number.size()-1;
@@ -132,8 +140,15 @@ class Large {
                 }
                 tmp = s/10;
             }
+            while (tmp > 0) {
+                number.insert(number.begin(),tmp%10);
+                tmp = tmp/10;
+            }
         };
         void add(int n) {
+            add(Large(n));
+        };
+        void add(long n) {
             add(Large(n));
         };
         int get(int i) {
