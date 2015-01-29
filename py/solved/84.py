@@ -21,7 +21,7 @@ class Board(object):
     def __init__(self):
         self.hist = [0]*40
         self.position = 0
-        self.dice = (Die(4),Die(4))
+        self.dice = (Die(6),Die(6))
         self.chance = CardDeck([
             '','','','',
             '','','10','rail',
@@ -90,7 +90,7 @@ class Board(object):
 
 h = [0]*40
 games = 1#10**2
-turns = 10**5
+turns = 10**6
 for game in xrange(games):
     b = Board()
     for turn in xrange(turns):

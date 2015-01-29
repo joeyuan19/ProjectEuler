@@ -35,6 +35,8 @@ char i_to_c(int i) {
             return '8';
         case 9:
             return '9';
+        default:
+            return ' ';
     }
 }
 
