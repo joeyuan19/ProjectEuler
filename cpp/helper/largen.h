@@ -56,6 +56,14 @@ class Large {
                 n = n/10;
             }
         };
+        Large(long n) {
+            number.insert(number.begin(),n%10);
+            n = n/10;
+            while (n != 0) {
+                number.insert(number.begin(),n%10);
+                n = n/10;
+            }
+        };
         Large(int _size, int n) {
             number.resize(_size);
             int i = number.size()-1;
@@ -83,6 +91,9 @@ class Large {
                 return "0";
             }
         };
+        std::vector<int> getNumber() {
+            return number;
+        }
         void copy(Large * n) {
             number.resize(n->size());
             for (int i = 0; i < number.size(); i++) {
@@ -115,6 +126,10 @@ class Large {
                 tmp = tmp/10;
             }
         };
+        void divide(Large n) {
+            /*long tmp = n.toLong();
+            set(toLong()/n.toLong());*/
+        };
         void add(Large n) {
             int tmp = 0, s, i, j, v;
             for (i = n.size()-1, j = number.size()-1; i >= 0; i--,j--) {
@@ -127,8 +142,15 @@ class Large {
                 }
                 tmp = s/10;
             }
+            while (tmp > 0) {
+                number.insert(number.begin(),tmp%10);
+                tmp = tmp/10;
+            }
         };
         void add(int n) {
+            add(Large(n));
+        };
+        void add(long n) {
             add(Large(n));
         };
         int get(int i) {
@@ -155,6 +177,22 @@ class Large {
         };
         int compare(int n) {
             return compare(Large(n));
+        };
+        long toLong() {
+            long s = 0, tmp = 1;
+            for (int i = size()-1; i >= 0; i--) {
+                s += tmp*get(i);
+                tmp = 10*tmp;
+            }
+            return s;
+        };
+        int toInt() {
+            int s = 0, tmp = 1;
+            for (int i = size()-1; i >= 0; i--) {
+                s += tmp*get(i);
+                tmp = 10*tmp;
+            }
+            return s;
         };
 };
 
