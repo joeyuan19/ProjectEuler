@@ -36,7 +36,7 @@ char i_to_c(int i) {
         case 9:
             return '9';
         default:
-            return ' ';
+            return '#';
     }
 }
 
@@ -62,6 +62,11 @@ class Large {
             while (n != 0) {
                 number.insert(number.begin(),n%10);
                 n = n/10;
+            }
+        };
+        Large(Large * n) {
+            for (int i = n->size()-1; i >= 0; i--) {
+                number.insert(number.begin(),n->get(i));
             }
         };
         Large(int _size, int n) {
@@ -114,6 +119,13 @@ class Large {
                 number[i] = 0;
             }
         };
+        void pow(int n) {
+            Large tmp (1);
+            for (int i = 0; i < n; i++) {
+                tmp.multiply(this);
+            }
+            copy(&tmp);
+        }
         void multiply(int n) {
             int tmp = 0, s, i;
             for (i = number.size()-1; i >= 0; i--) {
@@ -125,6 +137,19 @@ class Large {
                 number.insert(number.begin(),tmp%10),
                 tmp = tmp/10;
             }
+        };
+        void multiply(Large n) {
+            long i, j, fi, fj;
+            Large result (0);
+            for (i = size()-1, fi = 1; i >= 0; i--, fi = fi*10) {
+                for (j = n.size()-1, fj = 1; j >= 0; j--, fj = fj*10) {
+                    Large tmp (get(i)*n.get(j));
+                    tmp.multiply(fi);
+                    tmp.multiply(fj);
+                    result.add(tmp);
+                }
+            }
+            copy(&result);
         };
         void divide(Large n) {
             /*long tmp = n.toLong();
@@ -143,8 +168,15 @@ class Large {
                 tmp = s/10;
             }
             while (tmp > 0) {
-                number.insert(number.begin(),tmp%10);
+                if (j < 0) {
+                    number.insert(number.begin(),tmp%10);
+                } else {
+                    s = number[j] + tmp;
+                    number[j] = s%10;
+                    tmp = s;
+                }
                 tmp = tmp/10;
+                j--;
             }
         };
         void add(int n) {
