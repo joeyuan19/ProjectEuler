@@ -185,9 +185,7 @@ class Large {
                 for (j = n.size()-1; j >= 0; j--, fj++) { 
                     Large tmp (get(i)*n.get(j));
                     tmp.exp(fi+fj);
-                    std::cout << tmp.toString() << std::endl;
                     result.add(tmp);
-                    std::cout << result.toString() << std::endl;
                 }
             }
             copy(&result);

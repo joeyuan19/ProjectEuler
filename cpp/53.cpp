@@ -38,10 +38,12 @@ long f(long n) {
 }
 
 int solve() {
-    cout << _c(5,3) << endl;
-    cout << c(5,3).toString() << endl << endl;
-    cout << _c(23,10) << endl;
-    cout << c(23,10).toString() << endl << endl;
+    Large x, y;
+    vector<int> v = {6,2,2,7,0,2,0,8,0,0};
+    x.reset(v);
+    y.reset(1001);
+    x.multiply(y);
+    cout << x.toString() << endl;
     return 0;
     long n, r;
     int a = 0;
