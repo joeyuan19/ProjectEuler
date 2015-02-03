@@ -26,31 +26,31 @@ int suitValue(char c) {
 int cardValue(char c) {
     switch (c) {
         case '2':
-            return 1;
-        case '3':
             return 2;
-        case '4':
+        case '3':
             return 3;
-        case '5':
+        case '4':
             return 4;
-        case '6':
+        case '5':
             return 5;
-        case '7':
+        case '6':
             return 6;
-        case '8':
+        case '7':
             return 7;
-        case '9':
+        case '8':
             return 8;
-        case 'T':
+        case '9':
             return 9;
-        case 'J':
+        case 'T':
             return 10;
-        case 'Q':
+        case 'J':
             return 11;
-        case 'K':
+        case 'Q':
             return 12;
-        case 'A':
+        case 'K':
             return 13;
+        case 'A':
+            return 14;
         default:
             return 0;
     }
@@ -117,7 +117,7 @@ int onePair(vector<Card> * cards) {
     for (i = 0; i < cards->size(); i++) {
         hist[cards->at(i).value()]++;
     }
-    for (i = 13; i >= 2; i--) {
+    for (i = 14; i >= 2; i--) {
         if (hist[i] == 2) {
             return i+14;
         }
@@ -167,7 +167,7 @@ int threeOfAKind(vector<Card> * cards) {
 int straight(vector<Card> * cards) {
     sort(cards);
     if (cards->at(0).value() == 2) {
-        if (cards->at(4).value() == 13) {
+        if (cards->at(4).value() == 14) {
             return 0;
         }
         for (int i = 1; i < cards->size()-1; i++) {
@@ -257,24 +257,34 @@ int royalFlush(vector<Card> * cards) {
 int valueHand(vector<Card> * cards) {
     int score;
     if ((score = royalFlush(cards)) > 0) {
+        //cout << "royalFlush" << endl;
         return score;
     } else if ((score = straightFlush(cards)) > 0) {
+        //cout << "straightFlush" << endl;
         return score;
     } else if ((score = fourOfAKind(cards)) > 0) {
+        //cout << "fourOfAKind" << endl;
         return score;
     } else if ((score = fullHouse(cards)) > 0) {
+        //cout << "fullHouse" << endl;
         return score;
     } else if ((score = flush(cards)) > 0) {
+        //cout << "flush" << endl;
         return score;
     } else if ((score = straight(cards)) > 0) {
+        //cout << "straight" << endl;
         return score;
     } else if ((score = threeOfAKind(cards)) > 0) {
+        //cout << "threeOfAKind" << endl;
         return score;
     } else if ((score = twoPair(cards)) > 0) {
+        //cout << "twoPair" << endl;
         return score;
     } else if ((score = onePair(cards)) > 0) {
+        //cout << "onePair" << endl;
         return score;
     } else {
+        //cout << "highCard" << endl;
         return highCard(cards);
     }
 }
@@ -300,20 +310,36 @@ class Hand {
         int handRank() {
             return valueHand(&cards);
         };
+        vector<Card> * getCards() {
+            return &cards;
+        }
 };
+
+int tieBreaker(Hand h1, Hand h2) {
+    int r = 14;
+    while (highCard(h1.getCards(),r) == highCard(h2.getCards(),r)) {
+        r--;
+    }
+    return highCard(h1.getCards(),r) > highCard(h2.getCards(),r);
+}
 
 
 int determineWinner(string s) {
     string p1 = s.substr(0,s.size()/2), p2 = s.substr(s.size()/2+1,s.size()/2);
     Hand h1 (p1), h2 (p2);
-    if (h1.handRank() > h2.handRank()) {
+    int r1 = h1.handRank(), r2 = h2.handRank();
+    if (r1 > r2) {
         return 1;
+    } else if (r1 == r2) {
+        return tieBreaker(h1,h2);
     } else {
         return 0;
     }
 }
 
 int solve() {
+    //cout << determineWinner("AH KH QH JH TH AC AS 5D 5C 4D") << endl;
+    //return 0;
     int a = 0;
     string line;
     ifstream f;
@@ -321,6 +347,7 @@ int solve() {
     if (f.is_open()) {
         while (getline(f,line)) {
             a += determineWinner(line);
+            cout << line << " count: " << a << endl;
         }
     }
     f.close();
