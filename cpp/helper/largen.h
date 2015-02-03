@@ -181,8 +181,8 @@ class Large {
             long i, j;
             long fi = 0, fj = 0;
             Large result (0);
-            for (i = size()-1; i >= 0; i--, fi++) { 
-                for (j = n.size()-1; j >= 0; j--, fj++) { 
+            for (i = size()-1, fi = 0; i >= 0; i--, fi++) { 
+                for (j = n.size()-1, fj = 0; j >= 0; j--, fj++) { 
                     Large tmp (get(i)*n.get(j));
                     tmp.exp(fi+fj);
                     result.add(tmp);
@@ -202,11 +202,7 @@ class Large {
                     while (compare(tmp) >= 0) {
                         q.add(t);
                         tmp.copy(&n);
-                        std::cout << "t   = " << t.toString()   << std::endl;
-                        std::cout << "q   = " << q.toString()   << std::endl;
-                        std::cout << "tmp = " << tmp.toString() << std::endl;
                         tmp.multiply(q);
-                        std::cout << "tmp = " << tmp.toString() << std::endl;
                     }
                     q.sub(t);
                     tmp.copy(&n);
@@ -259,6 +255,9 @@ class Large {
                         number[j] = number[j] - n.number[i] - tmp;
                         tmp = 0;
                     }
+                }
+                if (tmp > 0) {
+                    number[j]--;
                 }
                 shrinkToFit();
             }
