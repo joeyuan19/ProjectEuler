@@ -7,8 +7,12 @@
 # Copyright 2011 __MyCompanyName__. All rights reserved.
 
 
-e = 2**1000
-s = 0
-for i in str(e):
-    s =  s + int(i)
-print s
+def solve():
+    e = 2**1000
+    s = 0
+    for i in str(e):
+        s =  s + int(i)
+    return s
+
+from timer import time_function
+print(time_function(solve))

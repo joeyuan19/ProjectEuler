@@ -14,23 +14,25 @@ for n in range(1,10):
  
 print "Answer to PE63 =", s
 """
-i = 2
-s = 0
-while 1:
-    n = len(str(i))
-    c = 2
-    g = c**n
-    if g > i:
-        print "###",s,"###"
-        break
-    while g <= i:
-        if g == i:
-            s += 1
-            print s
+def solve():
+    i = 2
+    s = 0
+    while 1:
+        n = len(str(i))
+        c = 2
+        g = c**n
+        if g > i:
+            print("###",s,"###")
             break
-        else:
-            c += 1
-            g = c**n
-    i += 1
-    
-    
+        while g <= i:
+            if g == i:
+                s += 1
+                print(s)
+                break
+            else:
+                c += 1
+                g = c**n
+        i += 1
+        
+from timer import time_function
+print(time_function(solve))

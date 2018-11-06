@@ -7,7 +7,7 @@
 # Copyright 2011 Classified. All rights reserved.
 
 
-from math import *
+from math import sqrt
 from itertools import *
 
 def prime(n):
@@ -27,7 +27,7 @@ def prime2(n):
     global p
     p = [2]
     for i in range(3,n,2):
-        print i
+        #print i
         for c in p:
             if i%c == 0:
                 u = False
@@ -71,15 +71,20 @@ def pm_ck(n=1000000):
     for i in range(n):
         if prime(i):
             if f(perm(i)):
-                print i
+                #print i
                 s = s + 1
     return s
 
-x = input("n = ")
-if type(x) == int:
-    print pm_ck(x)
-else:
-    print pm_ck()
+def solve():
+    return pm_ck()
+
+from timer import time_function
+print(time_function(solve))
+#x = input("n = ")
+#if type(x) == int:
+#    print pm_ck(x)
+#else:
+#    print pm_ck()
         
         
 ##### 55 #####

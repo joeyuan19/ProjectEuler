@@ -44,20 +44,20 @@ def perm_check(d):
             return False
     return True
 
-p = Sieve(10000)
-p = [i for i in p if i > 1000]
-pairs = []
-for i in p:
-    print i
-    for inc in range(1,10000-i):
-        d = [i]
-        new = i + inc
-        while new in p: 
-            d.append(new)
-            new = new + inc
-        if len(d) == 3 and perm_check(d):
-            print d
-            pairs.append(d)
+def solve():
+    p = Sieve(10000)
+    p = [i for i in p if i > 1000]
+    pairs = []
+    for i in p:
+        for inc in range(1,10000-i):
+            d = [i]
+            new = i + inc
+            while new in p: 
+                d.append(new)
+                new = new + inc
+            if len(d) == 3 and perm_check(d):
+                pairs.append(d)
+    return int(''.join(str(i) for i in pairs))
 
-        
-print pairs
+from timer import time_function
+print(time_function(solve))

@@ -19,23 +19,25 @@ for d in range(10,100):
 49 98
 """
 
-n = [16,26,19,49]
-d = [64,65,95,98]
+def solve():
+    n = [16,26,19,49]
+    d = [64,65,95,98]
 
-N = 1
-D = 1
+    N = 1
+    D = 1
 
-for i in range(len(n)):
-	N = N*n[i]
-	D = D*d[i]
+    for i in range(len(n)):
+            N = N*n[i]
+            D = D*d[i]
 
-print N, D
+    #print N, D
 
-for i in range(N+1,1,-1):
-	if D%i == 0 and N%i == 0:
-		D = D/i
-		N = N/i
-		i = N
-print N, D
+    for i in range(N+1,1,-1):
+            if D%i == 0 and N%i == 0:
+                    D = D/i
+                    N = N/i
+                    i = N
+    return N, D
 
-
+from timer import time_function
+print(time_function(solve))

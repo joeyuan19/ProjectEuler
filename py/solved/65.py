@@ -9,10 +9,13 @@ while len(e) < 100:
 def converge(e,N):
     n = 1
     d = e[N-1]
-    for i in xrange(N-2,-1,-1):
+    for i in range(N-2,-1,-1):
         n = n + d*e[i]
         d,n = n,d
     return d,n
 
 
-print sum(int(i) for i in str(converge(e,100)[0]))
+def solve(): return sum(int(i) for i in str(converge(e,100)[0]))
+
+from timer import time_function
+print(time_function(solve))

@@ -50,13 +50,16 @@ def year(d,s,m,y):
     return d,s
     
     
-    
-months = [31,[28,29],31,39,31,39,31,31,39,31,39,31]
-d = 1
-s = 0
-for i in range(1901,2001):
-    d, s = year(d,s,months,i)
+   
+def solve():
+    months = [31,[28,29],31,39,31,39,31,31,39,31,39,31]
+    d = 1
+    s = 0
+    for i in range(1901,2001):
+        d, s = year(d,s,months,i)
 
-print d, s
-        
+    return d, s
     
+from timer import time_function
+print(time_function(solve))
+        

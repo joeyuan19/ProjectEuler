@@ -14,8 +14,8 @@ def prime(f):
     y = 1003
     while len(prime) != f: #<----n number of primes
         for i in range(y-1000,y): #<---- indent everything below 
-            if i%1000 == 0:
-                print i, len(prime)
+            #if i%1000 == 0:
+            #    print(i, len(prime))
             for c in prime:
                 if i%c == 0:
                     u = False
@@ -28,9 +28,10 @@ def prime(f):
         y = y + 1000
     return prime
 
-f = 10001
+def solve():
+    f = 10001
+    p = prime(f)
+    return p[-1]
 
-p = prime(f)
-
-print p[-1]
-
+from timer import time_function
+print(time_function(solve))

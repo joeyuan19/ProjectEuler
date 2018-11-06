@@ -50,4 +50,6 @@ def triangle_sum(x):
 
     return max(y[-1])
 
+from timer import time_function
+print(time_function(triangle_sum,x))
 

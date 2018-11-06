@@ -17,19 +17,20 @@ def pythagorean_triple(m,n):
 
 def dot(k,li):
     return [k*i for i in li]
+def solve():
+    N = 1500000
+    L = N+1
+    space = [0]*(L)
+    for m in range(1,int(L**.5)):
+        for n in range(1,m):
+            if (m-n)%2 == 1 and gcd(n,m) == 1:
+                k = 1
+                tri = pythagorean_triple(m,n)
+                while sum(k*i for i in tri) <= L:
+                    space[sum(k*i for i in tri)] += 1
+                    k += 1
 
-N = 1500000
-L = N+1
-space = [0]*(L)
-for m in xrange(1,int(L**.5)):
-    for n in xrange(1,m):
-        if (m-n)%2 == 1 and gcd(n,m) == 1:
-            k = 1
-            tri = pythagorean_triple(m,n)
-            while sum(k*i for i in tri) <= L:
-                space[sum(k*i for i in tri)] += 1
-                k += 1
+    return space.count(1)
 
-print space.count(1)
-
-
+from timer import time_function
+print(time_function(solve))

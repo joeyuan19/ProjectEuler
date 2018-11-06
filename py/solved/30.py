@@ -7,22 +7,30 @@
 # Copyright 2011 Classified. All rights reserved.
 
 
-def fifth(n):
-    s = str(n)
-    sum = 0
-    for i in s:
-        sum = sum + int(i)**5
-    if sum == n:
-        return True
-    else:
-        return False
+def powersum(n,p=5):
+    return sum(int(i)**p for i in str(n))
 
-def main():
-    sum = 0
-    for i in range(10,100000000):
-        if fifth(i):
-            print i
-            sum = sum + i
-    print '\n',sum
+def main(N):
+    return sum(i for i in range(11,N) if i == powersum(i))
 
-main()
+from timer import time_function
+
+def solve(P):
+    n = 10
+    s = 0
+    m = 9**P
+    for e in range(1,10):
+        if e*m < 10**(e-1):
+            N = e
+            break
+    lim = 10**(N-1)
+    while n < lim: 
+        p = powersum(n,P)
+        if p == n:
+            s += n
+        if p > n:
+            n = (n//10 + 1)*10
+        else:
+            n += 1
+    return s
+print(time_function(solve,5))

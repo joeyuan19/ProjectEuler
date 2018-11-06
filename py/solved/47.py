@@ -14,7 +14,7 @@ def primefactor(f):
         factors = [f]
     else:
         factors = []
-    for i in range(3,f/2 + 1,2):
+    for i in range(3,f//2 + 1,2):
         if f%i == 0:
             if prime(i):
                 factors.append(i)
@@ -32,13 +32,17 @@ def prime(n):
             return False
     return True
 
-d = []
-i = 1
-while len(d) != 4:
-    if len(primefactor(i)) == 4:
-        d.append(i)
-    else:
-        d = []
-    i = i + 1
-    print d
-print d
+def solve():
+    d = []
+    i = 1
+    while len(d) != 4:
+        if len(primefactor(i)) == 4:
+            d.append(i)
+        else:
+            d = []
+        i = i + 1
+        #print d
+    return d
+
+from timer import time_function
+print(time_function(solve))

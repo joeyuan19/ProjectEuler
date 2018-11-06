@@ -80,8 +80,8 @@ def main():
     for i in w:
         if tri(alpha_value(i)):
             t = t + 1
-    print t
+    return t
             
-main()
-
+from timer import time_function
+print(time_function(main))
 

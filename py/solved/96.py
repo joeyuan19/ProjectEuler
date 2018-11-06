@@ -9,29 +9,8 @@
 
 import numpy as np
 
-f = open("Sudoku.txt")
-p = []
-while 1:
-    line = f.readline()
-    if not line:
-        break
-    p.append(line[:9])
-
-puzzles = []
-d = []
-for i in p:
-    if 'Grid' in i:
-        puzzles.append(d)
-        d = []
-    else:
-        d.append(i)
-puzzles.append(d)
-puzzles.pop(0)
 
 
-
-
-import time
 
 def rowbyrow():
     d = []
@@ -55,13 +34,14 @@ def rowbyrow():
                 d[k][j] = int(c)
     return d
 
+"""
 def puzzprint(n):
-    print '+ - - - + - - - + - - - +'
+    print('+ - - - + - - - + - - - +')
     for p in range(3):
-        print '|',
+        print('|'),
         for i in range(3):
             print n[p][i],
-        print '|',
+        print('|'),
         for i in range(3,6):
             print n[p][i],
         print '|',
@@ -93,7 +73,7 @@ def puzzprint(n):
             print n[p][i],
         print '|'
     print '+ - - - + - - - + - - - +'
-
+"""
 ### useful functions
 
 def ld(x, y):
@@ -393,6 +373,7 @@ def Sudoku(n):
     s = str(xgrid[0][0]) + str(xgrid[0][1]) + str(xgrid[0][2])
     return int(s), xgrid
 
+"""
 def puzzprint(n):
     print '+ - - - + - - - + - - - +'
     for p in range(3):
@@ -431,25 +412,47 @@ def puzzprint(n):
             print n[p][i],
         print '|'
     print '+ - - - + - - - + - - - +'
+"""
+def euler96():
+    f = open("../files/Sudoku.txt")
+    p = []
+    while 1:
+        line = f.readline()
+        if not line:
+            break
+        p.append(line[:9])
 
-
-for j,i in enumerate(puzzles):
-    x =[]
-    for k,c in enumerate(i):
-        d = []
-        for h in c:
-            d.append(int(h))
-        x.append(d)
-    puzzles[j] = x
-f = 1
-sum = 0
-t = time.clock()
-for i in puzzles:
-    print "##### ", f, " #####"
-    c,x = Sudoku(i)
-    puzzprint(x)
-    sum = sum + c
-    f = f + 1
-print "time: ", time.clock()-t
-print sum
+    puzzles = []
+    d = []
+    for i in p:
+        if 'Grid' in i:
+            puzzles.append(d)
+            d = []
+        else:
+            d.append(i)
+    puzzles.append(d)
+    puzzles.pop(0)
     
+
+
+    for j,i in enumerate(puzzles):
+        x =[]
+        for k,c in enumerate(i):
+            d = []
+            for h in c:
+                d.append(int(h))
+            x.append(d)
+        puzzles[j] = x
+    f = 1
+    s = 0
+    for i in puzzles:
+        #print "##### ", f, " #####"
+        c,x = Sudoku(i)
+        #puzzprint(x)
+        s = s + c
+        f = f + 1
+    return s
+
+from timer import time_function
+print(time_function(euler96))
+

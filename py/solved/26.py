@@ -13,24 +13,32 @@ def repeat(s):
     for i in range(1,len(s)):
         c = s[:i]
         most = 0
-        for j in range(len(s)/i):
+        for j in range(len(s)//i):
             if c != s[j:j+i]:
                 len(c)
                 break
-#print str(a) + '/' + str(b), "=",
-a = 1
-for b in range(1,1000):
+def solve():
     a = 1
-    a, R = div(a,b)
-    #print str(a), ".",
-    x = str(a) + '.'
-    while R != 0:
-        if R < b:
-            R = R*10
-        a, R = div(R,b)
-        x = x + str(a)
-        if len(x) > 100:
-            break
-    repeat(x[2:])
-    print "1","/",b, x
-    
+    m = 0
+    for b in range(1,1000):
+        a = 1
+        a,R = div(a,b)
+        x = [R]
+        while R != 0:
+            if R < b:
+                R = R*10
+                x.append(0)
+            a,R = div(R,b)
+            if R in x:
+                d = len(x)-x.index(R)
+                if d > m:
+                    m = d
+                    mi = b
+                break
+            else:
+                x.append(R)
+    return mi
+ 
+from timer import time_function
+print(time_function(solve))
+

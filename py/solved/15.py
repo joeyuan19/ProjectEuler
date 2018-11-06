@@ -14,10 +14,6 @@
 #2(19 x 19 + 18 x 20)
 
 
-
-
-
-
 p = ''
 for i in range(20):
     p = p + 'r'
@@ -27,7 +23,7 @@ for i in range(20):
     
 
 
-
+"""
 explained nicely:
 
 rrrrrrrrrrrrrrrrrrrrdddddddddddddddddddd
@@ -37,6 +33,16 @@ rrrrrrrrrrrrrrrrrrrrdddddddddddddddddddd
 but you shouldnt account for permutations between r's and d's or 20! for each
 
 40!/(20!*20!)
+"""
 
+def factorial(n):
+    if n < 2:
+        return 1
+    else:
+        return n*factorial(n-1)
 
+def solve():
+    return factorial(40)/(factorial(20)**2)
 
+from timer import time_function
+print(time_function(solve))

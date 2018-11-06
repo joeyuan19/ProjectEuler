@@ -7,10 +7,12 @@
 # Copyright 2011 __MyCompanyName__. All rights reserved.
 
 
-for c in range(1000):
-    for b in range(c):
-        for a in range(b):
-            if a + b + c == 1000:
-                if a**2 + b**2 == c**2:
-                    print a,b,c
-                    print a*b*c
+def solve():
+    for c in range(1,1000):
+        for b in range(1,c):
+            for a in range(1,b):
+                if a + b + c == 1000:
+                    if a**2 + b**2 == c**2:
+                        return a*b*c
+from timer import time_function
+print(time_function(solve))

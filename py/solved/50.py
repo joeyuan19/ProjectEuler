@@ -20,19 +20,22 @@ def Sieve(N):
             x[h] += 1
     return [j+1 for j,i in enumerate(x) if i == 0]
 
-p = Sieve(1000000)
-highest = p[-1]
-count = 0
+def solve():
+    p = Sieve(1000000)
+    highest = p[-1]
+    count = 0
 
-for j in range(len(p)):
-    sum = 0
-    for k,i in enumerate(p[j:]):
-        sum += i
-        if sum in p:
-            if k + 1  > count:
-                count = k + 1
-                index = sum
-        elif sum > highest:
-            break
+    for j in range(len(p)):
+        s = 0
+        for k,i in enumerate(p[j:]):
+            s += i
+            if s in p:
+                if k + 1  > count:
+                    count = k + 1
+                    index = s
+            elif s > highest:
+                break
 
-print index, count
+    return index, count
+from timer import time_function
+print(time_function(solve))

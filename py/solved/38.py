@@ -24,17 +24,21 @@ def c(n):
     else:
         return False, s
         
+
+def solve():
+    n = 1
+    s = ''
+    most = 0
+    while len(str(n)) <= 5:
+        #print n
+        u, s = c(n)
+        if u:
+            #print u,s
+            if int(s) > most:
+                most = int(s)
+        n += 1 
         
-n = 1
-s = ''
-most = 0
-while len(str(n)) <= 5:
-    print n
-    u, s = c(n)
-    if u:
-        print u,s
-        if int(s) > most:
-            most = int(s)
-    n += 1 
-    
-print most
+    return most
+
+from timer import time_function
+print(time_function(solve))

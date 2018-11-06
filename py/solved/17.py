@@ -29,7 +29,7 @@ def dig(n):
         return 'nine'
 
 def tens(n):
-    a = n/10
+    a = n//10
     if a == 0:
         return ''
     elif a == 1:
@@ -92,7 +92,7 @@ def namenumber(n):
     # b = twenty
     # c = three
     if n > 99:
-        a = hundred(n/100,n%100)
+        a = hundred(n//100,n%100)
     else:
         a = ''
     if n >9:
@@ -104,15 +104,18 @@ def namenumber(n):
     else:  
         c = ''
     return a+b+c
-name = ''
-for i in range(1,1001):
-    print namenumber(i)
-    name = name + namenumber(i)
-print name
-print len(name)
-    
-    
-    
-    
+
+def solve():
+    name = ''
+    for i in range(1,1001):
+        #print namenumber(i)
+        name = name + namenumber(i)
+    #print name
+    return len(name)
+
+from timer import time_function 
+print(time_function(solve))        
+        
+        
     
     

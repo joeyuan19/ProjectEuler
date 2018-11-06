@@ -28,7 +28,7 @@ def binary(n):
     
 def palindrome_check(n):
     s = str(n)
-    for i in range(len(s)/2 + 1):
+    for i in range(len(s)//2 + 1):
         if s[i] != s[-(i+1)]:
             return False
     return True
@@ -45,12 +45,13 @@ def main(N=1000000):
     s = 0
     for i in range(N):
         if base_check(i):
-            print i, binary(i), base_check
+            #print i, binary(i), base_check
             s += i
         else:
             pass
-    print s
+    return s
     
-main()
+from timer import time_function
+print(time_function(main))
 
 

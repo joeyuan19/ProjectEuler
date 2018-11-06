@@ -68,22 +68,25 @@ def check(number):
 			return False
 	return True
 
-number = [1,0,2,3,4,5,6,7,8,9]
+def solve():
+    number = [1,0,2,3,4,5,6,7,8,9]
 
 
-i = 0
-N = 9*fact(9)
+    i = 0
+    N = 9*fact(9)
 
-print N
-sum = 0
+    #print N
+    s = 0
 
-while i < N:
-	print i
-	if check(number):
-		sum += listToNum(number)
-	i += 1
-	permute(number)
+    while i < N:
+            #print i
+            if check(number):
+                    s += listToNum(number)
+            i += 1
+            permute(number)
 
-print sum
-	
+    return s
+
+from timer import time_function
+print(time_function(solve))
 

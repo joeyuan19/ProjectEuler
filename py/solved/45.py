@@ -36,16 +36,18 @@ def equality(h,index):
         i = i + 1
     return True
         
+def solve(): 
+    index = 144
+    he = h(index)
+
+    while not equality(he,index):
+        index += 1
+        he = h(index)
         
-index = 144
-hex = h(index)
+    return index, he
 
-while not equality(hex,index):
-    index += 1
-    hex = h(index)
-    
-print index, hex
-
+from timer import time_function
+print(time_function(solve))
 
 """
   

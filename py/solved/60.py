@@ -33,28 +33,31 @@ def sset(*lists):
         tmp += li
     return [i for i in set(tmp) if all(i in li for li in lists)]
 
-N = 10000
-primes = sieve(N)
-print "sieve created"
-L = len(primes)
-pairs = {i:[] for i in primes}
+def solve():
+    N = 10000
+    primes = sieve(N)
+    #print "sieve created"
+    L = len(primes)
+    pairs = {i:[] for i in primes}
 
-for i in xrange(L):
-    for j in xrange(i+1,L):
-        if prime_cc(primes[i],primes[j]):
-            pairs[primes[i]].append(primes[j])
-            pairs[primes[j]].append(primes[i])
+    for i in range(L):
+        for j in range(i+1,L):
+            if prime_cc(primes[i],primes[j]):
+                pairs[primes[i]].append(primes[j])
+                pairs[primes[j]].append(primes[i])
 
-print "pairs found"
+    #print "pairs found"
 
-m = 100000000000000
-for a in primes:
-    for b in pairs[a]:
-        for c in sset(pairs[a],pairs[b]):
-            for d in sset(pairs[a],pairs[b],pairs[c]):
-                for e in sset(pairs[a],pairs[b],pairs[c],pairs[d]):
-                    print a,b,c,d,e
-                    m = min(m,sum((a,b,c,d,e)))
-print m
+    m = 100000000000000
+    for a in primes:
+        for b in pairs[a]:
+            for c in sset(pairs[a],pairs[b]):
+                for d in sset(pairs[a],pairs[b],pairs[c]):
+                    for e in sset(pairs[a],pairs[b],pairs[c],pairs[d]):
+                        #print a,b,c,d,e
+                        m = min(m,sum((a,b,c,d,e)))
+    return m
 
+from timer import time_function
+print(time_function(solve))
 

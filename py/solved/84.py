@@ -21,7 +21,7 @@ class Board(object):
     def __init__(self):
         self.hist = [0]*40
         self.position = 0
-        self.dice = (Die(6),Die(6))
+        self.dice = (Die(4),Die(4))
         self.chance = CardDeck([
             '','','','',
             '','','10','rail',
@@ -41,7 +41,7 @@ class Board(object):
 
     def spread(self):
         s = float(sum(i for i in self.hist))
-        return [(self.hist[i]/s,i) for i in xrange(40)]
+        return [(self.hist[i]/s,i) for i in range(40)]
 
     def turn(self):
         double = 0
@@ -88,21 +88,25 @@ class Board(object):
             else:
                 self.move(new_position)
 
-h = [0]*40
-games = 1#10**2
-turns = 10**6
-for game in xrange(games):
-    b = Board()
-    for turn in xrange(turns):
-        b.turn()
-    for i in xrange(40):
-        h[i] += b.hist[i]
-
 def pad(n):
     s = str(n)
     if len(s) < 2:
         return "0"+s
     return s
 
-p = float(sum(h))
-print ''.join(pad(j[1]) for j in sorted([(h[i]/p,i) for i in xrange(40)])[::-1][:3])
+def solve():
+    h = [0]*40
+    games = 1#10**2
+    turns = 10**6
+    for game in range(games):
+        b = Board()
+        for turn in range(turns):
+            b.turn()
+        for i in range(40):
+            h[i] += b.hist[i]
+
+    p = float(sum(h))
+    return ''.join(pad(j[1]) for j in sorted([(h[i]/p,i) for i in range(40)])[::-1][:3])
+
+from timer import time_function
+print(time_function(solve))

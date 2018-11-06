@@ -8,44 +8,49 @@
 
 from math import *
 
-global p
-p = []
-def prime(n,c=len(p)):
-    if n < 2:
-        return False
-    elif n == 2:
-        return True
-    elif n%2 == 0:
-        return False
-    for i in p[:c]:
-        if n%i == 0:
-            return False
-    return True
+def sieve(N):
+    s = [0,0,1]+[1,0]*(N//2)
+    i = 3
+    while i*i < N:
+        if s[i]:
+            for itr in range(i*2,N,i):
+                s[itr] = 0
+        i += 2
+    return [i for i in range(N) if s[i]==1]
 
-def trunc(n):
+
+def prime(n,P,PN):
+    if n > PN:
+        P = sieve(10*n)
+        PN = 10*n
+    return n in P
+
+def trunc(n,P,PN):
     s = str(n)
-    for i in range(len(s)):
-        if s[i:] != '':
-            if not prime(int(s[i:]),len(p)-1):
-                return False
-        if s[:i+1] != '':
-            if not prime(int(s[:i+1]),len(p)-1):
-                return False
-    return True
+    l = len(s)
+    return all(prime(int(s[i:]),P,PN) for i in range(l)) and all(prime(int(s[:l-i]),P,PN) for i in range(1,l))
 
 def main():
-    t = 3
+    PN = 1000000
+    P = sieve(PN)
+    ti = 4
     tp = 0
-    sum = 0
+    s = 0
     while tp != 11:
-        if prime(t):
-            if len(str(t)) > 1:
-                if trunc(t):
-                    print t
-                    sum = sum + t
-                    tp = tp + 1
-        t = t + 1
-    print sum
+        try:
+            t = P[ti]
+        except:
+            P = sieve(PN*10)
+            PN = PN*10
+            t = P[ti]
+        print(t)
+        if trunc(t,P,PN):
+            print(t)
+            s = s + t
+            tp = tp + 1
+        ti += 1
+    return s
             
-main()
+from timer import time_function
+print(time_function(main))
             

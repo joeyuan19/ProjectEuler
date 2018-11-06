@@ -17,16 +17,16 @@ def prime(x):
 		if x%i == 0:
 			return False
 	return True
+def solve():
+    N = 1000000000
+    m = 0
+    i = 1
+    while i < N:
+            if pancheck(i):
+                    if prime(i):
+                            m = i
+            i += 1
+    return m
 
-N = 1000000000
-max = 0
-i = 1
-while i < N:
-	if pancheck(i):
-		if prime(i):
-			max = i
-			print max
-	i += 1
-print max
-
-
+from timer import time_function
+print(time_function(solve))

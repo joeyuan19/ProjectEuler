@@ -50,39 +50,43 @@ smallest composite that cannot be written:
 x = a + 2 (b^2) where a is prime
 
 '''
-N = 10000
-inc = 1
-found = False
-while not found:
-    
-    oddcomp, pr = sieve_odd_composite(N*inc)
+def solve():
+    N = 10000
+    inc = 1
+    found = False
+    while not found:
+        
+        oddcomp, pr = sieve_odd_composite(N*inc)
 
-    for n in oddcomp:
-        if n == 1:
-            pass
-        else:
-            for a in pr:
-                if a > n:
-                    s = True
-                    break
-                b = 1
-                while 1:
-                    if n < a + 2*(b**2):
-                        u = True
+        for n in oddcomp:
+            if n == 1:
+                pass
+            else:
+                for a in pr:
+                    if a > n:
+                        s = True
                         break
-                    elif n == a + 2*(b**2):
-                        u = False
-                        break 
-                    b += 1
-                if not u:
-                    s = False
+                    b = 1
+                    while 1:
+                        if n < a + 2*(b**2):
+                            u = True
+                            break
+                        elif n == a + 2*(b**2):
+                            u = False
+                            break 
+                        b += 1
+                    if not u:
+                        s = False
+                        break
+                if s:
+                    return n
+                    found = True
                     break
-            if s:
-                print n
-                found = True
-                break
-                
-                
-                
-    print n,"on to the next one"
-    inc += 1
+                    
+                    
+                    
+        #print n,"on to the next one"
+        inc += 1
+
+from timer import time_function
+print(time_function(solve))

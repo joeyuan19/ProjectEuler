@@ -20,14 +20,18 @@ def ptest(n,j=0):
             return False
         else:
             index += 1
-k = 1
-while 1:
-    for j in range(1,k):
-        if ptest(abs(p(k) - p(j))):
-            if ptest(p(k) + p(j)):
-                print j,k,abs(p(k) - p(j))
-                sys.exit(0)
-    k += 1
+def solve():
+    k = 1
+    while 1:
+        for j in range(1,k):
+            if ptest(abs(p(k) - p(j))):
+                if ptest(p(k) + p(j)):
+#                    print j,k,abs(p(k) - p(j))
+                    sys.exit(0)
+        k += 1
+
+from timer import time_function
+print(time_function(solve))
 
 """
 min = 70

@@ -32,4 +32,5 @@ def count(N):
     return sol[-1]
             
 count(100)
-
+from timer import time_function
+print(time_function(count,100))

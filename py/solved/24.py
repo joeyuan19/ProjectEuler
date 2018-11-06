@@ -14,15 +14,14 @@ def list_str(a):
         a = list(str(a))
     return a
 
+def solve():
+    a = list_str("123")
+    b = []
+    for i in permutations('0123456789'):
+        b.append(i)
+        
+    return int(''.join(b[999999]))
 
-a = list_str("123")
-
-b = []
-for i in permutations('0123456789'):
-    b.append(i)
-    
-print b[999999]
-
-
-    
-    
+from timer import time_function
+print(time_function(solve)) 
+        

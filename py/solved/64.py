@@ -11,12 +11,17 @@ def cont(s):
     return p
 
 from decimal import *
-getcontext().prec = 100
 
-N = 10000
-s = 0
-for i in range(2,N+1):
-    if int(i**.5) != i**.5 and cont(i)%2 == 1:
-        s += 1
+def solve():
+    getcontext().prec = 100
 
-print s
+    N = 10000
+    s = 0
+    for i in range(2,N+1):
+        if int(i**.5) != i**.5 and cont(i)%2 == 1:
+            s += 1
+
+    return s
+
+from timer import time_function
+print(time_function(solve))

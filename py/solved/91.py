@@ -16,17 +16,19 @@ def is_right_tri(p1,p2,p3):
             return True            
     return False
 
-lim = 50+1
-n = 0
-for x1 in range(lim):
-    for y1 in range(lim):
-        for x2 in range(lim):
-            for y2 in range(lim):
-                print x1,y1,x2,y2
-                if is_right_tri((0,0),(x1,y1),(x2,y2)):
-                    n += 1
+def solve():
+    lim = 50+1
+    n = 0
+    for x1 in range(lim):
+        for y1 in range(lim):
+            for x2 in range(lim):
+                for y2 in range(lim):
+                    print(x1,y1,x2,y2)
+                    if is_right_tri((0,0),(x1,y1),(x2,y2)):
+                        n += 1
 
-print n/2
+    return n//2
 
-
+from timer import time_function
+print(time_function(solve))
 

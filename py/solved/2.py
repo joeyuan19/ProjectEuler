@@ -1,3 +1,4 @@
+from timer import time_function
 #!/bin/sh
 
 # P2.py
@@ -21,4 +22,5 @@ def evenfib(n):
         if i%2 == 0:
             sum = sum + i
     return sum
-print evenfib(4000000)
+
+print(time_function(evenfib,4000000))

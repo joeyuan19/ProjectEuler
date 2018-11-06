@@ -37,16 +37,18 @@ def ndiv(f):
     for i in pf:
         t = t*(i[1]+1)
     return t
-    
-i = 1
-tri = i
-while ndiv(tri)<500:
-    i = i + 1
-    tri = tri + i
-print tri
-    
-### try 76576500
 
+def solve():
+    i = 1
+    tri = i
+    while ndiv(tri)<500:
+        i = i + 1
+        tri = tri + i
+    return tri
+ 
+### try 76576500
+from timer import time_function
+print(time_function(solve))
 
 
 

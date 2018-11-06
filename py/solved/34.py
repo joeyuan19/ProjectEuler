@@ -8,20 +8,26 @@
 
 from math import factorial as f
 
-def factorial_sum(n):
-    if type(n) != list:
-        n = list(str(n))
-    for j,i in enumerate(n):
-        n[j] = int(i)
-    sum = 0
-    for i in n:
-        sum = sum + f(i)
-    return sum
+def f_sum(n):
+    return sum(f(int(i)) for i in str(n)) 
 
+def solve():
+    m = f(9)
+    for i in range(1,10):
+        if i*m < 10**(i-1):
+            lim = 10**(i-1)
+            break
+    n = 10
+    s = 0
+    while n < lim: 
+        p = f_sum(n)
+        if p == n:
+            s += n
+        if p > n:
+            n = (n//10 + 1)*10
+        else:
+            n += 1
+    return s
 
-s = 0
-for i in range(10,9999999):
-    if factorial_sum(i) == i:
-        s = s + i
-        
-print s
+from timer import time_function
+print(time_function(solve))

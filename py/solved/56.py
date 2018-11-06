@@ -14,12 +14,16 @@ def digit_sum(n):
         sum = sum + int(i)
     return sum
 
-i = 0
-for a in range(101):
-    for b in range(101):
-        print a,'^',b
-        c = digit_sum(a**b)
-        if c > i:
-            i = c
-            
-print i
+def solve():
+    i = 0
+    for a in range(101):
+        for b in range(101):
+            #print a,'^',b
+            c = digit_sum(a**b)
+            if c > i:
+                i = c
+                
+    return i
+
+from timer import time_function
+print(time_function(solve))

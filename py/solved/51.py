@@ -65,12 +65,16 @@ def getNumPrimes(x):
 				max_numPrimes = n
 	return max_numPrimes
 
-n = 0
-i = 0
-while n != 8:
-	i += 1
-	print i
-	if prime(i):
-		n = getNumPrimes(i)
-print n, i
+def solve():
+    n = 0
+    i = 0
+    while n != 8:
+            i += 1
+            print(i)
+            if prime(i):
+                    n = getNumPrimes(i)
+    return n, i
+
+from timer import time_function
+print(time_function(solve))
 

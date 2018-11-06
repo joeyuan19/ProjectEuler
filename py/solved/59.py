@@ -37,7 +37,7 @@ print sum(b)
 
 
 
-f = open("cipher1.TXT")
+f = open("../files/cipher1.TXT")
 text = [i for i  in f]
 code = []
 for i in text:
@@ -53,7 +53,6 @@ for i in text:
 f = [code.count(i) for i in range(257)]
 
     
-key = 'god'
 
 def key_change(x):
     #changes key not generally, just for this program
@@ -62,7 +61,7 @@ def key_change(x):
     if ord(new_key[-3]) == ord('z'):
         if ord(new_key[-2]) == ord('z'):
             if ord(new_key[-1]) == ord('z'):
-                print "uh oh"
+                print("uh oh")
                 return new_key
                 
     if ord(new_key[-1]) < ord('z'):
@@ -93,20 +92,23 @@ def filter(s):
 def XOR(code,key,solve=True):
     s = ''
     for i in range(len(code)):
-        
+        pass    
     return ''.join(chr(ord(key[i%len(key)])-code[i]) for i in range(len(code)) if check(i))
 # print code
 
-for i in range(len(code)):
-    print key[i%len(key)], code[i], chr( ord(key[i%len(key)])-code[i] )
+#for i in range(len(code)):
+#    print key[i%len(key)], code[i], chr( ord(key[i%len(key)])-code[i] )
 
-print XOR(code,'gos')
-
-
+#print XOR(code,'gos')
  
-for i in range(26**3):
-    c = XOR(code,key)
-    print key
-    print c
-    print '\n\n'
-    key = key_change(key)
+def solve():
+    key = 'god'
+    for i in range(26**3):
+        c = XOR(code,key)
+        print(key)
+        print(c)
+        print('\n\n')
+        key = key_change(key)
+
+from timer import time_function
+print(time_function(solve))

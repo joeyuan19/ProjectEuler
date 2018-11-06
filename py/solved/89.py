@@ -104,24 +104,28 @@ def denum(s):
 		i += 1
 	return x
 
-print 40, num(40), denum("XL")
-print 911, num(911), denum("CXVVI")
-print 129, num(129), denum("CXXIX")
-print 7, num(7), denum("VII")
-print 9, num(9), denum("IX")
-print 34, num(34), denum("XXXIV")
+#print 40, num(40), denum("XL")
+#print 911, num(911), denum("CXVVI")
+#print 129, num(129), denum("CXXIX")
+#print 7, num(7), denum("VII")
+#print 9, num(9), denum("IX")
+#print 34, num(34), denum("XXXIV")
 
+def solve():
+    with open('roman.txt','r') as f:
+            nums = [line.strip() for line in f]
 
-with open('roman.txt','r') as f:
-	nums = [line.strip() for line in f]
+    orig_len = 0
+    abrv_len = 0
 
-orig_len = 0
-abrv_len = 0
+    for i in nums:
+            #print i, num(denum(i))
+            orig_len += len(i)
+            abrv_len += len(num(denum(i)))
 
-for i in nums:
-	#print i, num(denum(i))
-	orig_len += len(i)
-	abrv_len += len(num(denum(i)))
+    #return orig_len, abrv_len, (orig_len - abrv_len)
+    return orig_len - abrv_len
 
-print orig_len, abrv_len, (orig_len - abrv_len)
+from timer import time_function
+print(time_function(solve))
 

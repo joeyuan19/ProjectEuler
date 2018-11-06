@@ -5,10 +5,14 @@ However, in 2004 there was found a massive non-Mersenne prime which contains 2,3
 
 Find the last ten digits of this prime number."""
 
-n = 7830457
-p = 1
-for i in range(n):
-    p = p*2
-    p = int(str(p)[-10:])
+def solve():
+    n = 7830457
+    p = 1
+    for i in range(n):
+        p = p*2
+        p = int(str(p)[-10:])
 
-print str(p*28433 + 1)[-10:]
+    return str(p*28433 + 1)[-10:]
+
+from timer import time_function
+print(time_function(solve))

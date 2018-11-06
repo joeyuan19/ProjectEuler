@@ -120,10 +120,9 @@ x = [
 #    x[j] = i[:-1] + ','
 
 
-t = time.clock()
 
-print triangle_sum(x)
+def solve(): return triangle_sum(x)
 
-print time.clock() - t
-
+from timer import time_function
+print(time_function(solve))
 

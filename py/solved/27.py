@@ -23,19 +23,22 @@ def prime(n):
 def f(n,a,b):
     return n**2 + a*n + b
 
-most = 0
-A = 0
-B = 0
-for a in range(-1000,1001):
-    for b in range(-1000,1001):
-        print a,b
-        n = 0
-        num = f(n,a,b)
-        while prime(num):
-            n += 1
+def solve():
+    most = 0
+    A = 0
+    B = 0
+    for a in range(-1000,1001):
+        for b in range(-1000,1001):
+            n = 0
             num = f(n,a,b)
-        if n > most:
-            most = n
-            A = a
-            B = b
-print A*B
+            while prime(num):
+                n += 1
+                num = f(n,a,b)
+            if n > most:
+                most = n
+                A = a
+                B = b
+    return A*B
+
+from timer import time_function
+print(time_function(solve))
